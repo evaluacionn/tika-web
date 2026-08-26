@@ -1,0 +1,26 @@
+/**
+ * Placeholder imagery, reused from the Stitch exports per the Phase 1
+ * direction ("you may continue using the existing Stitch image URLs").
+ * These are temporary AI-preview images tied to the Stitch prototype and
+ * MUST be replaced with real, licensed photography of the actual business
+ * before production. Centralizing them here means that swap only has to
+ * happen in one file.
+ */
+export const IMAGES = {
+  heroBath:
+    'https://lh3.googleusercontent.com/aida-public/AB6AXuCpUTvUYkwlamrKnaqv8v9RvwCQY14dQMumZYD0Me6WdIdVACXtSdXeqF2YYJzNVNH__bb4qQKqYKnWv18S-Xm3AHTNUpyqFsMImWrhzDlF-TpkjKSy5HcDWJu65yTl8JcDk7NsXhaOoKO458P1aKST_XG6NLhVMvBRl_4u5RlzPC-pgb6YuJy5qQvyoJsgl4EQvX-ntUuNiSf4U-C9z_qje-RcJpDBuhyHGJfG9QQvC8XdYU_45pN1sA',
+  vanInterior:
+    'https://lh3.googleusercontent.com/aida-public/AB6AXuDHVvFD3wjj8ZN6N-pOSNlrAv6n2TqAlMe1dBRa6RaVHpmMHtIOw-w4qvFhNoLbLaeWI_KngV92UZJ9PuxMpeF66nt7hxekgQfw_y8Ql2tDSitaNhBQrL7Eh0gDSfwCw_BYkAovwMiuLbga01pC17mgoIP-8lJMxTx0GW2p9oJyd1M3X_sI2bVITtI1OEEhPCx1TmvvC--hw9UY9lWYXqip_cc23k9rDqwZnZ0-6SZ8yFfymmJH0ycO5A',
+  essentialBath:
+    'https://lh3.googleusercontent.com/aida-public/AB6AXuAfyxPB4wrZ9K_mj6eLQaempigY_dsvgEES_J2LIOnQKjQhwp22YkcF-9Cleih6pjzyLi8hUpZqecmfAB1C9tL6BZZBRbX3LopbnOUigHVqUV7TdCf1RBiBfca3kHq61jTqrdAfBi3bQs5YqDmSXBcO5kWGkSZS6sSGnt_TcR4WRvcpz9i01fXNuTvXc_dkm6GhJujtpM5jLf5gbdGUM618GlJ1kIRKqdiN9m_xXLQvb5HUMTwN7smPgA',
+  fullGrooming:
+    'https://lh3.googleusercontent.com/aida-public/AB6AXuBENoDJGbIX7g_QLJYFJcY6jdL5JtSbePr-EiR-22Nv2-ksrer52j6I4QZPZ6n_Ji21e9LJRhyc97oH1lsivFOCua6b6hCur0Mv0Nd4SQ3ei7Q3hbrbh1Zd7mlpN3TmsRTaMonKNlzZAQcjyvhDQh8M7XD18X6PO60FRnyabgj0hCs-kqHlJMyi_sL816pRgBXU5K7JeaqRLJB3iTSUt4EJhat6K8DNni7rAH0SMALeGwU3qw7CwjPCXg',
+  vipTreatment:
+    'https://lh3.googleusercontent.com/aida-public/AB6AXuDv-R1WQaM1qyhfZ384k8ER1bxnl4HEwSRNmlCz-f2OpdOnupgngaZjb2m5RMqzmoBHtmjF9ggTAdvGEhkoi_KoaBcr5eh96-lZs9ZV3Gf2JD2Vej3TkWXlEdFo1TCoXa5lB87vhvjNFknTzbBS3i84cNd5m4Z9xHgzkbvdT_BAuXtfgW4QeMaypRLhYHlcjYxdPsuijMlGYE4N63UXUHwsG_i6ujztodyiG24csOUh0GY_wuX9W9Zq6w',
+  aboutTeam:
+    'https://lh3.googleusercontent.com/aida-public/AB6AXuBgujLgjnLnwgnmrPgbAHE5ABpb7CBjEkeiNzNSTg830XmIX7yWE_njiSukU2XBgxYTx8KWRT-vwdDckV91Tgoi-bN2oJy0V5NNYtsOihejO7Fkc9fegGivEn7yFWSIbZqzfVzUjMiHGjOL8efJ8AjQIj6WaD9PXG9FZKGQnwvVxzynl8UTJQJrkDLc0p-2TJhXXrk98HY1Cbg7XfrDUjPT97Ovpng2w_A7L_OACKuUHpj1HGfxm4K0Iw',
+  petLuna:
+    'https://lh3.googleusercontent.com/aida-public/AB6AXuDcxjKPpb-2vCppIr2Wg-bONJp5FlZ1_prI-uLq_pcEvc54ye3nBorvOsf9xbmSvGGKPxnnIRRq1vWSmu8vOBIYS54T6ljEf2N1QbRchZMDGBgyj_K0ub0xKra2lGWfA8npGBDn3iohWxKc9yQv6uR9Vc7VYcvCzfii1hhrYZ3J3yy6ALIaiQvPfc4C_FkgCvCIsBXt7Kq5cm7Idw53zAS5CRrlkvWtEYFhmQNuAwG9ss9-vLmkMIEABg',
+  staffPortrait:
+    'https://lh3.googleusercontent.com/aida-public/AB6AXuBHursHZNBpj8lR8epBYFnulX05ZovLbAvAmb--p18oQRCYE05kfJhf50OR3M1vtHWwJccRVuxHzwM_6dIySF0-irRK5A-11ioWv_JFzzqV2uDyixJwGDReXho8p03MkDfhfH9A1op60s6SNUY1ojfo58YfakpWRm2WfeyXXncqeym2xvAWK3CeyzVLSNuueypY5kyiOaUMZgnUwYR0khFoQ7ge5cjI4QtQD-7WM8vHRIg2b6DebELUAw',
+}
