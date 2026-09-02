@@ -13,6 +13,11 @@ function borderClasses(error) {
  * Shared form field used across both Booking Step 2 (Pet & Customer) and
  * Step 3 (Date & Location). Handles text/tel/email/number/textarea/select
  * uniformly, with a leading icon slot and inline error message.
+ *
+ * Validation is always custom/JS-driven (see utils/validation.js) — fields
+ * never rely on the browser's native constraint-validation UI, so error
+ * state is exposed to assistive tech via aria-invalid/aria-describedby
+ * instead.
  */
 export default function FormField({
   label,
@@ -27,8 +32,14 @@ export default function FormField({
   rows = 3,
   options,
   className = '',
+  inputMode,
+  maxLength,
+  min,
+  max,
 }) {
   const inputId = `field-${name}`
+  const errorId = `${inputId}-error`
+  const describedBy = error ? errorId : undefined
 
   return (
     <div className={`space-y-xs ${className}`}>
@@ -49,6 +60,9 @@ export default function FormField({
             onChange={onChange}
             placeholder={placeholder}
             rows={rows}
+            aria-invalid={error ? 'true' : undefined}
+            aria-describedby={describedBy}
+            aria-required={required || undefined}
             className={`${baseInputClasses} ${borderClasses(error)} resize-none`}
           />
         ) : type === 'select' ? (
@@ -57,6 +71,9 @@ export default function FormField({
             name={name}
             value={value}
             onChange={onChange}
+            aria-invalid={error ? 'true' : undefined}
+            aria-describedby={describedBy}
+            aria-required={required || undefined}
             className={`${baseInputClasses} ${borderClasses(error)} appearance-none ${icon ? 'pl-10' : ''}`}
           >
             <option value="" disabled>
@@ -76,6 +93,13 @@ export default function FormField({
             value={value}
             onChange={onChange}
             placeholder={placeholder}
+            inputMode={inputMode}
+            maxLength={maxLength}
+            min={min}
+            max={max}
+            aria-invalid={error ? 'true' : undefined}
+            aria-describedby={describedBy}
+            aria-required={required || undefined}
             className={`${baseInputClasses} ${borderClasses(error)} ${icon ? 'pl-10' : ''}`}
           />
         )}
@@ -83,7 +107,11 @@ export default function FormField({
           <Icon name="expand_more" className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant" />
         )}
       </div>
-      {error && <p className="font-body-sm text-body-sm text-error">{error}</p>}
+      {error && (
+        <p id={errorId} role="alert" className="font-body-sm text-body-sm text-error">
+          {error}
+        </p>
+      )}
     </div>
   )
 }

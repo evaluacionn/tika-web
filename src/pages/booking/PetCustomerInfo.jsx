@@ -7,7 +7,7 @@ import SizeChipGroup from '../../components/ui/SizeChipGroup.jsx'
 import Button from '../../components/ui/Button.jsx'
 import Icon from '../../components/ui/Icon.jsx'
 import { useBooking } from '../../context/BookingContext.jsx'
-import { validatePetCustomerForm, isValid } from '../../utils/validation.js'
+import { validatePetCustomerForm, isValid, PHONE_MAX_LENGTH } from '../../utils/validation.js'
 
 const TEMPERAMENT_OPTIONS = [
   { value: 'calm', label: 'Calm / Docile' },
@@ -51,6 +51,7 @@ export default function PetCustomerInfo() {
         <ProgressSteps currentStep={2} />
 
         <form
+          noValidate
           className="space-y-xl bg-surface-container-lowest ambient-shadow rounded-xl p-md md:p-lg border border-surface-variant"
           onSubmit={(e) => {
             e.preventDefault()
@@ -120,6 +121,8 @@ export default function PetCustomerInfo() {
                 label="Phone"
                 name="ownerPhone"
                 type="tel"
+                inputMode="tel"
+                maxLength={PHONE_MAX_LENGTH}
                 required
                 icon="call"
                 placeholder="+1 123 456 7890"

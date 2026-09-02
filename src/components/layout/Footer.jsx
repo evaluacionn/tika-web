@@ -1,5 +1,19 @@
 import { Link } from 'react-router-dom'
 
+const linkClasses = 'font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors duration-200'
+// Not wired up yet in this prototype — rendered as inactive, non-clickable text
+// instead of a link to a fake "#" destination.
+const placeholderClasses = 'font-body-sm text-body-sm text-on-surface-variant/50 cursor-not-allowed'
+
+function FooterPlaceholder({ children }) {
+  return (
+    <span className={placeholderClasses} aria-disabled="true" title="Coming soon">
+      {children}
+      <span className="sr-only"> (coming soon)</span>
+    </span>
+  )
+}
+
 export default function Footer() {
   return (
     <footer className="hidden md:block w-full mt-xl bg-surface-container-highest">
@@ -17,14 +31,10 @@ export default function Footer() {
           <h4 className="font-headline-sm text-headline-sm text-primary mb-sm">Legal</h4>
           <ul className="space-y-xs">
             <li>
-              <a className="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors duration-200" href="#">
-                Privacy
-              </a>
+              <FooterPlaceholder>Privacy</FooterPlaceholder>
             </li>
             <li>
-              <a className="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors duration-200" href="#">
-                Terms
-              </a>
+              <FooterPlaceholder>Terms</FooterPlaceholder>
             </li>
           </ul>
         </div>
@@ -32,24 +42,20 @@ export default function Footer() {
           <h4 className="font-headline-sm text-headline-sm text-primary mb-sm">Connect</h4>
           <ul className="space-y-xs">
             <li>
-              <a className="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors duration-200" href="#">
+              <a className={linkClasses} href="mailto:hello@tikawellness.com">
                 Contact
               </a>
             </li>
             <li>
-              <a className="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors duration-200" href="#">
-                Instagram
-              </a>
+              <FooterPlaceholder>Instagram</FooterPlaceholder>
             </li>
             <li>
-              <a className="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors duration-200" href="#">
-                Facebook
-              </a>
+              <FooterPlaceholder>Facebook</FooterPlaceholder>
             </li>
           </ul>
         </div>
         <div className="col-span-1 md:col-span-4 mt-lg pt-md border-t border-outline-variant/30 flex flex-col md:flex-row justify-between items-center gap-sm">
-          <p className="font-body-sm text-body-sm text-on-surface-variant">© 2024 TIKA Premium Canine Wellness. All rights reserved.</p>
+          <p className="font-body-sm text-body-sm text-on-surface-variant">© 2026 TIKA Premium Canine Wellness. All rights reserved.</p>
           <p className="font-body-sm text-body-sm text-on-surface-variant">(555) 123-4567 &middot; Serving Virginia, USA</p>
         </div>
       </div>

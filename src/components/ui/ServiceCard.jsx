@@ -8,13 +8,17 @@ import Icon from './Icon.jsx'
 export default function ServiceCard({ service, selectable = false, selected = false, onSelect, ctaLabel, onCtaClick }) {
   return (
     <div
-      role={selectable ? 'button' : undefined}
+      role={selectable ? 'radio' : undefined}
+      aria-checked={selectable ? selected : undefined}
       tabIndex={selectable ? 0 : undefined}
       onClick={selectable ? onSelect : undefined}
       onKeyDown={
         selectable
           ? (e) => {
-              if (e.key === 'Enter' || e.key === ' ') onSelect()
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault()
+                onSelect()
+              }
             }
           : undefined
       }

@@ -6,7 +6,7 @@ import FormField from '../../components/ui/FormField.jsx'
 import Button from '../../components/ui/Button.jsx'
 import Icon from '../../components/ui/Icon.jsx'
 import { useBooking } from '../../context/BookingContext.jsx'
-import { validateDateLocationForm, isValid } from '../../utils/validation.js'
+import { validateDateLocationForm, isValid, getBookingDateBounds } from '../../utils/validation.js'
 
 const TIME_SLOTS = [
   { value: '09:00 AM', icon: 'partly_cloudy_day', available: true },
@@ -31,6 +31,9 @@ export default function DateLocation() {
   const [time, setTime] = useState(booking.schedule.time)
   const [errors, setErrors] = useState({})
 
+  // Recomputed on every mount so "today" stays accurate for long-lived sessions.
+  const { min: minDate, max: maxDate } = getBookingDateBounds()
+
   useEffect(() => {
     if (!hasService) navigate('/booking/service', { replace: true })
     else if (!hasPetAndCustomer) navigate('/booking/pet-info', { replace: true })
@@ -40,14 +43,12 @@ export default function DateLocation() {
   const updateLocation = (field) => (e) => setLocationLocal((l) => ({ ...l, [field]: e.target.value }))
 
   const handleContinue = () => {
-    const dateLabel = formatDateLabel(isoDate)
-    const schedule = { date: dateLabel, isoDate, time }
-    const validationErrors = validateDateLocationForm({ location, schedule })
+    const validationErrors = validateDateLocationForm({ location, schedule: { isoDate, time } })
     setErrors(validationErrors)
     if (!isValid(validationErrors)) return
 
     setLocation(location)
-    setSchedule(schedule)
+    setSchedule({ date: formatDateLabel(isoDate), isoDate, time })
     navigate('/booking/review')
   }
 
@@ -100,6 +101,8 @@ export default function DateLocation() {
                 name="date"
                 type="date"
                 required
+                min={minDate}
+                max={maxDate}
                 value={isoDate}
                 onChange={(e) => setIsoDate(e.target.value)}
                 error={errors.date}
@@ -107,13 +110,25 @@ export default function DateLocation() {
             </div>
 
             <div className="space-y-md">
-              <h2 className="font-headline-sm text-headline-sm text-on-surface">Available Times</h2>
-              <div className="grid grid-cols-2 gap-sm">
+              <h2 className="font-headline-sm text-headline-sm text-on-surface" id="timeSlots-label">
+                Available Times
+              </h2>
+              <div
+                role="radiogroup"
+                aria-labelledby="timeSlots-label"
+                aria-required="true"
+                aria-invalid={errors.time ? 'true' : undefined}
+                aria-describedby={errors.time ? 'timeSlots-error' : undefined}
+                className="grid grid-cols-2 gap-sm"
+              >
                 {TIME_SLOTS.map((slot) => {
                   const selected = time === slot.value
                   return (
                     <button
                       type="button"
+                      role="radio"
+                      aria-checked={selected}
+                      aria-disabled={!slot.available || undefined}
                       key={slot.value}
                       disabled={!slot.available}
                       onClick={() => setTime(slot.value)}
@@ -127,11 +142,16 @@ export default function DateLocation() {
                     >
                       <Icon name={slot.icon} className="text-[20px]" />
                       {slot.value}
+                      {!slot.available && <span className="sr-only"> (unavailable)</span>}
                     </button>
                   )
                 })}
               </div>
-              {errors.time && <p className="font-body-sm text-body-sm text-error">{errors.time}</p>}
+              {errors.time && (
+                <p id="timeSlots-error" role="alert" className="font-body-sm text-body-sm text-error">
+                  {errors.time}
+                </p>
+              )}
             </div>
           </section>
 
@@ -158,7 +178,7 @@ export default function DateLocation() {
                   <p className="font-body-sm text-body-sm text-on-surface-variant">{booking.customer.email || '—'}</p>
                 </div>
               </div>
-              <div className="border-t border-outline-variant pt-4 mt-2 flex justify-between items-center">
+              <div className="border-t border-outline-variant pt-4 mt-2 flex justify-between items-center" aria-live="polite">
                 <span className="font-body-lg text-body-lg font-semibold text-on-background">Total Estimated Price</span>
                 <span className="font-headline-md text-headline-md font-bold text-primary">
                   {booking.service ? `$${booking.service.price}.00 USD` : '—'}

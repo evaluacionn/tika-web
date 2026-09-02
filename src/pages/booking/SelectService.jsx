@@ -41,7 +41,7 @@ export default function SelectService() {
                 Choose the perfect spa package for your companion's needs.
               </p>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+            <div role="radiogroup" aria-label="Select service" className="grid grid-cols-1 md:grid-cols-3 gap-gutter">
               {SERVICES.map((service) => (
                 <ServiceCard
                   key={service.id}
@@ -56,7 +56,7 @@ export default function SelectService() {
               ))}
             </div>
             {showError && (
-              <p className="font-body-sm text-body-sm text-error flex items-center gap-1">
+              <p role="alert" className="font-body-sm text-body-sm text-error flex items-center gap-1">
                 <Icon name="error" className="text-[18px]" /> Please select a service to continue.
               </p>
             )}
@@ -65,7 +65,7 @@ export default function SelectService() {
           <div className="lg:col-span-4">
             <div className="bg-surface-container-low rounded-xl ambient-shadow p-md lg:sticky lg:top-32">
               <h2 className="font-headline-sm text-headline-sm text-on-surface mb-md">Booking Summary</h2>
-              <div className="space-y-sm mb-lg">
+              <div className="space-y-sm mb-lg" aria-live="polite">
                 <div className="flex justify-between items-start">
                   <div>
                     <p className="font-body-md text-body-md text-on-surface font-semibold">Service</p>
